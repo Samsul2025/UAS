@@ -7,9 +7,18 @@ use App\Models\Account;
 
 class ReportController extends Controller
 {
-    public function trialBalance()
+    public function trialBalance(Request $request)
     {
-        $accounts = Account::with('journalDetails')->get();
+        $start = $request->tanggal_awal;
+        $end = $request->tanggal_akhir;
+
+        $accounts = Account::with(['journalDetails' => function($query) use ($start, $end) {
+            if ($start && $end) {
+                $query->whereHas('journalEntry', function ($q) use ($start, $end) {
+                    $q->whereBetween('date', [$start, $end]);
+                });
+            }
+        }])->get();
 
         $data = $accounts->map(function ($a) {
             $debit = $a->journalDetails->sum('debit');
@@ -17,18 +26,19 @@ class ReportController extends Controller
             $saldo = $a->normal_balance === 'Debit' ? $debit - $credit : $credit - $debit;
 
             return [
-                'code'            => $a->code,
-                'name'            => $a->name,
-                'type'            => $a->type,
-                'normal_balance'  => $a->normal_balance,
-                'debit'           => $debit,
-                'credit'          => $credit,
-                'saldo'           => $saldo,
+                'code' => $a->code,
+                'name' => $a->name,
+                'type' => $a->type,
+                'normal_balance' => $a->normal_balance,
+                'saldo' => $saldo,
+                'debit' => $debit,
+                'credit' => $credit,
             ];
         });
 
         return view('reports.trial-balance', compact('data'));
     }
+
 
     public function incomeStatement()
     {
