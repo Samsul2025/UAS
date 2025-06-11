@@ -492,7 +492,7 @@
                     <li class="dropdown">
                         <a href="#">{{ Auth::user()->name }} <i class="fas fa-chevron-down"></i></a>
                         <div class="dropdown-menu">
-                            <a href="{{ url('/home') }}">Dashboard</a> {{-- Asumsi ada halaman dashboard --}}
+                            <a href="{{ url('/dashboard') }}">Dashboard</a> {{-- Asumsi ada halaman dashboard --}}
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="btn-danger-link">
