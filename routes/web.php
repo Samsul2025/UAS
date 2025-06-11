@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\JournalEntryController;
-
+use App\Http\Controllers\ReportController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,10 +19,16 @@ Route::middleware([
 });
 
 
-
-
 Route::middleware(['auth'])->group(function () {
     Route::resource('accounts', AccountController::class);
     Route::resource('journals', JournalEntryController::class);
-});
+    
+    Route::get('laporan/neraca-saldo', [ReportController::class, 'trialBalance'])->name('laporan.neraca-saldo');
+    Route::get('laporan/laba-rugi', [ReportController::class, 'incomeStatement'])->name('laporan.laba-rugi');
 
+    Route::get('neraca-saldo', [ReportController::class, 'trialBalance'])->name('laporan.neraca-saldo');
+    Route::get('laba-rugi', [ReportController::class, 'incomeStatement'])->name('laporan.laba-rugi');
+    Route::get('neraca', [ReportController::class, 'balanceSheet'])->name('laporan.neraca');
+    Route::get('perubahan-modal', [ReportController::class, 'equityChange'])->name('laporan.perubahan-modal');
+    Route::get('arus-kas', [ReportController::class, 'cashFlow'])->name('laporan.arus-kas');
+});
