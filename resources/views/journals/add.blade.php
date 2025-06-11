@@ -3,7 +3,7 @@
 
     <div class="mb-3">
         <label>Tanggal:</label>
-        <input type="date" name="date" required class="form-control">
+        <input type="date" name="date" required class="form-control" value="{{ date('Y-m-d') }}">
     </div>
 
     <div class="mb-3">
@@ -30,8 +30,8 @@
         </tbody>
     </table>
 
-    <button type="button" class="btn btn-secondary mb-2" onclick="addRow()">+ Tambah Baris</button>
-    <button type="submit" class="btn btn-success">Simpan</button>
+    <button type="button" class="btn btn-secondary" onclick="addRow()">+ Tambah Baris</button>
+    <button type="submit" class="btn btn-success" id="btn-simpan">Simpan</button>
 </form>
 
 <script>
@@ -54,3 +54,41 @@ function addRow() {
     row++;
 }
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const table = document.getElementById('account-rows');
+    const btnSimpan = document.getElementById('btn-simpan');
+
+    function updateButtonStatus() {
+        let debitTotal = 0;
+        let creditTotal = 0;
+
+        document.querySelectorAll('input[name^="accounts"]').forEach(input => {
+            if (input.name.includes('[debit]') && input.value) {
+                debitTotal += parseFloat(input.value) || 0;
+            }
+            if (input.name.includes('[credit]') && input.value) {
+                creditTotal += parseFloat(input.value) || 0;
+            }
+        });
+
+        // Aktifkan tombol hanya jika debit == kredit dan > 0
+        btnSimpan.disabled = !(debitTotal > 0 && debitTotal === creditTotal);
+
+        // Tampilkan indikator perbedaan (opsional)
+        document.getElementById('selisih-info').textContent =
+            (debitTotal !== creditTotal)
+                ? `⚠️ Selisih Rp ${Math.abs(debitTotal - creditTotal).toLocaleString('id-ID')}`
+                : '✅ Balance';
+    }
+
+    // Trigger update saat angka berubah
+    table.addEventListener('input', updateButtonStatus);
+
+    // Inisialisasi saat pertama
+    updateButtonStatus();
+});
+</script>
+<p id="selisih-info" class="mt-2 text-danger"></p>
+

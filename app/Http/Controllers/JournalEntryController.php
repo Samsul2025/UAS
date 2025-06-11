@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\AccountingPeriod;
 use App\Models\JournalDetail;
 use App\Models\JournalEntry;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class JournalEntryController extends Controller
             'accounts.*.credit' => 'nullable|numeric',
         ]);
 
-        $periode = \App\Models\AccountingPeriod::where('status', 'Dibuka')->first();
+        $periode = AccountingPeriod::where('status', 'Dibuka')->first();
         if (!$periode || now()->lt($periode->tanggal_awal) || now()->gt($periode->tanggal_akhir)) {
             return back()->withErrors(['Periode akuntansi saat ini sudah ditutup atau belum tersedia.']);
         }
@@ -183,6 +184,33 @@ class JournalEntryController extends Controller
 
         return redirect()->route('journals.penutup')->with('success', 'Jurnal penutup berhasil disimpan.');
     }
+ 
+    public function reset_transaksi()
+    {
+        try {
+            DB::beginTransaction();
+
+            DB::table('journal_details')->delete();
+            DB::table('journal_entries')->delete();
+            // DB::table('adjusting_entries')->delete();
+            // DB::table('closing_entries')->delete();
+            // DB::table('kas_bank_details')->delete();
+            // DB::table('kas_banks')->delete();
+            // DB::table('sales_items')->delete();
+            // DB::table('sales')->delete();
+            // DB::table('purchase_items')->delete();
+            // DB::table('purchases')->delete();
+            // DB::table('payments')->delete();
+
+            DB::commit();
+
+            return back()->with('success', '✅ Semua data transaksi berhasil dikosongkan.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', '❌ Gagal mengosongkan transaksi: ' . $e->getMessage());
+        }
+    }
+
 
 
 }

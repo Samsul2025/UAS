@@ -68,6 +68,15 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Manajemen User</a></li>
                             <li>
+                                <form action="{{ route('transaksi.reset') }}" method="POST" onsubmit="return confirm('Yakin ingin mengosongkan semua data transaksi? Semua data akan dihapus secara permanen!')">
+                                    @csrf
+                                    <button class="btn btn-danger w-100" type="submit">
+                                        🗑 Kosongkan Transaksi
+                                    </button>
+                                </form>
+
+                            </li>
+                            <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button class="dropdown-item" type="submit">Logout</button>
