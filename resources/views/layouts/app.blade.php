@@ -10,7 +10,7 @@
     <style>
         /* CSS Tambahan untuk Tampilan Awal yang Elegan */
         .hero-section {
-            background: linear-gradient(to right,rgb(226, 221, 221),rgb(173, 129, 134)); /* Gradient dari merah gelap ke merah tua */
+            background: linear-gradient(to right, #dc3545, #8a0c1a); /* Gradient dari merah gelap ke merah tua */
             color: white;
             padding: 100px 0;
             text-align: center;
