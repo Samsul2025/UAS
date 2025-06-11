@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CashBankController;
 use App\Http\Controllers\JournalEntryController;
+use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\ReportController;
 Route::get('/', function () {
     return view('welcome');
@@ -37,4 +39,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/journals/penutup/index', [JournalEntryController::class, 'indexPenutup'])->name('journals.penutup');
     Route::post('/journals/penutup/store', [JournalEntryController::class, 'storePenutup'])->name('journals.penutup.store');
+
+    Route::get('/buku-besar', [LedgerController::class, 'index'])->name('ledger.index');
+
+    Route::get('/kas-bank', [CashBankController::class, 'index'])->name('cashbank.index');
+    Route::post('/kas-bank', [CashBankController::class, 'store'])->name('cashbank.store');
+
 });

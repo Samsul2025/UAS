@@ -4,15 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JournalDetail extends Model
+class CashBank extends Model
 {
-    protected $fillable = [
-        'journal_entry_id',
-        'account_id',
-        'debit',
-        'credit',
-    ];
-
+    protected $fillable = ['tipe_transaksi', 'sumber', 'tanggal', 'deskripsi', 'jumlah', 'account_id', 'journal_entry_id'];
 
     public function account()
     {
@@ -23,6 +17,4 @@ class JournalDetail extends Model
     {
         return $this->belongsTo(JournalEntry::class);
     }
-    
-
 }

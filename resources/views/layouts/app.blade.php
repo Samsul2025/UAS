@@ -29,8 +29,8 @@
                             <li><a class="dropdown-item" href="{{ route('journals.index') }}">Jurnal Umum</a></li>
                             <li><a class="dropdown-item" href="{{ route('journals.penyesuaian') }}">Jurnal Penyesuaian</a></li>
                             <li><a class="dropdown-item" href="{{ route('journals.penutup') }}">Jurnal Penutup</a></li>
-                            <li><a class="dropdown-item" href="#">Buku Besar</a></li>
-                            <li><a class="dropdown-item" href="#">Kas & Bank</a></li>
+                            <li><a class="dropdown-item" href="{{ route('ledger.index') }}">Buku Besar</a></li>
+                            <li><a class="dropdown-item" href="{{ route('cashbank.index') }}">Kas & Bank</a></li>
                         </ul>
                     </li>
 
