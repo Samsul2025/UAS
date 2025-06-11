@@ -4,6 +4,7 @@
 <div class="container">
     <h4>Daftar Akun</h4>
     <a href="{{ route('accounts.create') }}" class="btn btn-primary mb-3">Tambah Akun</a>
+    
     <table class="table">
         <thead>
             <tr>
@@ -21,5 +22,11 @@
             @endforeach
         </tbody>
     </table>
+    <div class="mt-3">
+        {{ $accounts->links() }}
+
+        <p>Menampilkan {{ $accounts->firstItem() }} - {{ $accounts->lastItem() }} dari total {{ $accounts->total() }} akun.</p>
+
+    </div>
 </div>
 @endsection

@@ -32,6 +32,12 @@ class JournalEntryController extends Controller
             'accounts.*.credit' => 'nullable|numeric',
         ]);
 
+        $periode = \App\Models\AccountingPeriod::where('status', 'Dibuka')->first();
+        if (!$periode || now()->lt($periode->tanggal_awal) || now()->gt($periode->tanggal_akhir)) {
+            return back()->withErrors(['Periode akuntansi saat ini sudah ditutup atau belum tersedia.']);
+        }
+
+
         $totalDebit = collect($request->accounts)->sum('debit');
         $totalCredit = collect($request->accounts)->sum('credit');
 
