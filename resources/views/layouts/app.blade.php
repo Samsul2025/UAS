@@ -11,91 +11,96 @@
     @stack('styles')
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}">Akuntansi</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url('/') }}">Akuntansi</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- Transaksi -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menuTransaksi" data-bs-toggle="dropdown">
-                            Transaksi
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('journals.index') }}">Jurnal Umum</a></li>
-                            <li><a class="dropdown-item" href="{{ route('journals.penyesuaian') }}">Jurnal Penyesuaian</a></li>
-                            <li><a class="dropdown-item" href="{{ route('journals.penutup') }}">Jurnal Penutup</a></li>
-                            <li><a class="dropdown-item" href="{{ route('ledger.index') }}">Buku Besar</a></li>
-                            <li><a class="dropdown-item" href="{{ route('cashbank.index') }}">Kas & Bank</a></li>
-                        </ul>
-                    </li>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="menuTransaksi" data-bs-toggle="dropdown">
+                        Transaksi
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('journals.index') }}">Jurnal Umum</a></li>
+                        <li><a class="dropdown-item" href="{{ route('journals.penyesuaian') }}">Jurnal Penyesuaian</a></li>
+                        <li><a class="dropdown-item" href="{{ route('journals.penutup') }}">Jurnal Penutup</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ledger.index') }}">Buku Besar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('cashbank.index') }}">Kas & Bank</a></li>
+                    </ul>
+                </li>
 
-                    <!-- Master Data -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menuMaster" data-bs-toggle="dropdown">
-                            Data Master
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('accounts.index') }}">Daftar Akun</a></li>
-                            <li><a class="dropdown-item" href="{{ route('periode-akuntansi.index') }}">Periode Akuntansi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('units.index') }}">Unit / Departemen</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="menuMaster" data-bs-toggle="dropdown">
+                        Data Master
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('accounts.index') }}">Daftar Akun</a></li>
+                        <li><a class="dropdown-item" href="{{ route('periode-akuntansi.index') }}">Periode Akuntansi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('units.index') }}">Unit / Departemen</a></li>
+                    </ul>
+                </li>
 
-                    <!-- Laporan -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menuLaporan" data-bs-toggle="dropdown">
-                            Laporan
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('laporan.neraca-saldo') }}">Neraca Saldo</a></li>
-                            <li><a class="dropdown-item" href="{{ route('laporan.laba-rugi') }}">Laba Rugi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('laporan.neraca') }}">Neraca</a></li>
-                            <li><a class="dropdown-item" href="{{ route('laporan.perubahan-modal') }}">Perubahan Modal</a></li>
-                            <li><a class="dropdown-item" href="{{ route('laporan.arus-kas') }}">Arus Kas</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="menuLaporan" data-bs-toggle="dropdown">
+                        Laporan
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('laporan.neraca-saldo') }}">Neraca Saldo</a></li>
+                        <li><a class="dropdown-item" href="{{ route('laporan.laba-rugi') }}">Laba Rugi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('laporan.neraca') }}">Neraca</a></li>
+                        <li><a class="dropdown-item" href="{{ route('laporan.perubahan-modal') }}">Perubahan Modal</a></li>
+                        <li><a class="dropdown-item" href="{{ route('laporan.arus-kas') }}">Arus Kas</a></li>
+                    </ul>
+                </li>
 
-                    <!-- Pengaturan -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menuPengaturan" data-bs-toggle="dropdown">
-                            Pengaturan
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Manajemen User</a></li>
-                            <li>
-                                <form action="{{ route('transaksi.reset') }}" method="POST" onsubmit="return confirm('Yakin ingin mengosongkan semua data transaksi? Semua data akan dihapus secara permanen!')">
-                                    @csrf
-                                    <button class="btn btn-danger w-100" type="submit">
-                                        🗑 Kosongkan Transaksi
-                                    </button>
-                                </form>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="menuPengaturan" data-bs-toggle="dropdown">
+                        Pengaturan
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Manajemen User</a></li>
+                        <li>
+                            <form action="{{ route('transaksi.reset') }}" method="POST" onsubmit="return confirm('Yakin ingin mengosongkan semua data transaksi? Semua data akan dihapus secara permanen!')">
+                                @csrf
+                                <button class="btn btn-danger w-100" type="submit">
+                                    Kosongkan
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
-                            </li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button class="dropdown-item" type="submit">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <span class="navbar-text text-white">
-                    {{ Auth::user()->name ?? 'Guest' }}
-                </span>
-            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name ?? 'Guest' }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        {{-- You can add other user-related links here if needed --}}
+                        {{-- <li><a class="dropdown-item" href="#">Profile</a></li> --}}
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
     <div class="container mt-4">
         @yield('content')
+        
         @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}

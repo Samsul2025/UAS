@@ -613,7 +613,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} Nama Perusahaan Akuntansi Anda. Hak Cipta Dilindungi.</p>
+                <p>&copy; {{ date('Y') }} Universitas Hang Tuah Pekanbaru.</p>
             </div>
         </div>
     </footer>
