@@ -7,6 +7,8 @@ use App\Http\Controllers\CashBankController;
 use App\Http\Controllers\JournalEntryController;
 use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UnitController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -47,5 +49,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/kas-bank', [CashBankController::class, 'store'])->name('cashbank.store');
 
     Route::resource('/periode-akuntansi', AccountingPeriodController::class)->except(['show']);
+    Route::resource('units', UnitController::class);
 
 });

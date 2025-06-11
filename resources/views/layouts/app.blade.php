@@ -42,7 +42,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('accounts.index') }}">Daftar Akun</a></li>
                             <li><a class="dropdown-item" href="{{ route('periode-akuntansi.index') }}">Periode Akuntansi</a></li>
-                            <li><a class="dropdown-item" href="#">Unit / Departemen</a></li>
+                            <li><a class="dropdown-item" href="{{ route('units.index') }}">Unit / Departemen</a></li>
                         </ul>
                     </li>
 
@@ -54,9 +54,9 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('laporan.neraca-saldo') }}">Neraca Saldo</a></li>
                             <li><a class="dropdown-item" href="{{ route('laporan.laba-rugi') }}">Laba Rugi</a></li>
-                            <li><a class="dropdown-item" href="#">Neraca</a></li>
-                            <li><a class="dropdown-item" href="#">Perubahan Modal</a></li>
-                            <li><a class="dropdown-item" href="#">Arus Kas</a></li>
+                            <li><a class="dropdown-item" href="{{ route('laporan.neraca') }}">Neraca</a></li>
+                            <li><a class="dropdown-item" href="{{ route('laporan.perubahan-modal') }}">Perubahan Modal</a></li>
+                            <li><a class="dropdown-item" href="{{ route('laporan.arus-kas') }}">Arus Kas</a></li>
                         </ul>
                     </li>
 
