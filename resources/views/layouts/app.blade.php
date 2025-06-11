@@ -41,7 +41,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('accounts.index') }}">Daftar Akun</a></li>
-                            <li><a class="dropdown-item" href="#">Periode Akuntansi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('periode-akuntansi.index') }}">Periode Akuntansi</a></li>
                             <li><a class="dropdown-item" href="#">Unit / Departemen</a></li>
                         </ul>
                     </li>

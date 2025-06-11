@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountingPeriodController;
 use App\Http\Controllers\CashBankController;
 use App\Http\Controllers\JournalEntryController;
 use App\Http\Controllers\LedgerController;
@@ -44,5 +45,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/kas-bank', [CashBankController::class, 'index'])->name('cashbank.index');
     Route::post('/kas-bank', [CashBankController::class, 'store'])->name('cashbank.store');
+
+    Route::resource('/periode-akuntansi', AccountingPeriodController::class)->except(['show']);
 
 });
