@@ -39,10 +39,18 @@ class ReportController extends Controller
         return view('reports.trial-balance', compact('data'));
     }
 
-
-    public function incomeStatement()
+    public function incomeStatement(Request $request)
     {
-        $accounts = Account::with('journalDetails')->get();
+        $start = $request->tanggal_awal;
+        $end = $request->tanggal_akhir;
+
+        $accounts = Account::with(['journalDetails' => function($query) use ($start, $end) {
+            if ($start && $end) {
+                $query->whereHas('journalEntry', function ($q) use ($start, $end) {
+                    $q->whereBetween('date', [$start, $end]);
+                });
+            }
+        }])->get();
 
         $pendapatan = $accounts->where('type', 'Pendapatan')->sum(fn($a) => $a->journalDetails->sum('credit') - $a->journalDetails->sum('debit'));
         $beban = $accounts->where('type', 'Beban')->sum(fn($a) => $a->journalDetails->sum('debit') - $a->journalDetails->sum('credit'));
@@ -51,9 +59,18 @@ class ReportController extends Controller
         return view('reports.income-statement', compact('pendapatan', 'beban', 'labaBersih'));
     }
 
-    public function balanceSheet()
+    public function balanceSheet(Request $request)
     {
-        $accounts = Account::with('journalDetails')->get();
+        $start = $request->tanggal_awal;
+        $end = $request->tanggal_akhir;
+
+        $accounts = Account::with(['journalDetails' => function($query) use ($start, $end) {
+            if ($start && $end) {
+                $query->whereHas('journalEntry', function ($q) use ($start, $end) {
+                    $q->whereBetween('date', [$start, $end]);
+                });
+            }
+        }])->get();
 
         $aset = $accounts->where('type', 'Aset')->sum(fn($a) => $this->hitungSaldo($a));
         $kewajiban = $accounts->where('type', 'Kewajiban')->sum(fn($a) => $this->hitungSaldo($a));
@@ -62,25 +79,47 @@ class ReportController extends Controller
         return view('reports.balance-sheet', compact('aset', 'kewajiban', 'modal'));
     }
 
-    public function equityChange()
+    public function equityChange(Request $request)
     {
-        $modalAwal = Account::where('type', 'Modal')->sum(fn($a) => $this->hitungSaldo($a));
-        $prive = Account::where('name', 'like', '%Prive%')->sum(fn($a) => $a->journalDetails->sum('debit'));
-        $labaBersih = $this->hitungLabaBersih();
+        $start = $request->tanggal_awal;
+        $end = $request->tanggal_akhir;
+
+        $accounts = Account::with(['journalDetails' => function($query) use ($start, $end) {
+            if ($start && $end) {
+                $query->whereHas('journalEntry', function ($q) use ($start, $end) {
+                    $q->whereBetween('date', [$start, $end]);
+                });
+            }
+        }])->get();
+
+        $modalAwal = $accounts->where('type', 'Modal')->sum(fn($a) => $this->hitungSaldo($a));
+        $prive = $accounts->where('name', 'like', '%Prive%')->sum(fn($a) => $a->journalDetails->sum('debit'));
+        $labaBersih = $this->hitungLabaBersih($accounts);
         $modalAkhir = $modalAwal + $labaBersih - $prive;
 
         return view('reports.equity-change', compact('modalAwal', 'prive', 'labaBersih', 'modalAkhir'));
     }
 
-    public function cashFlow()
+    public function cashFlow(Request $request)
     {
-        $kas = Account::where('name', 'like', '%Kas%')->first();
+        $start = $request->tanggal_awal;
+        $end = $request->tanggal_akhir;
+
+        $accounts = Account::with(['journalDetails' => function($query) use ($start, $end) {
+            if ($start && $end) {
+                $query->whereHas('journalEntry', function ($q) use ($start, $end) {
+                    $q->whereBetween('date', [$start, $end]);
+                });
+            }
+        }])->get();
+
+        $kas = $accounts->where('name', 'like', '%Kas%')->first();
         $debitKas = $kas?->journalDetails->sum('debit') ?? 0;
         $kreditKas = $kas?->journalDetails->sum('credit') ?? 0;
         $saldoKas = $debitKas - $kreditKas;
 
-        $labaBersih = $this->hitungLabaBersih();
-        $penyesuaian = 0; // opsional: dapat ditambahkan penyusutan dll.
+        $labaBersih = $this->hitungLabaBersih($accounts);
+        $penyesuaian = 0;
         $kasAwal = $saldoKas - $labaBersih;
 
         return view('reports.cash-flow', compact('kasAwal', 'labaBersih', 'penyesuaian', 'saldoKas'));
@@ -93,10 +132,8 @@ class ReportController extends Controller
         return $akun->normal_balance === 'Debit' ? $debit - $credit : $credit - $debit;
     }
 
-    private function hitungLabaBersih()
+    private function hitungLabaBersih($accounts)
     {
-        $accounts = Account::with('journalDetails')->get();
-
         $pendapatan = $accounts->where('type', 'Pendapatan')->sum(fn($a) => $a->journalDetails->sum('credit') - $a->journalDetails->sum('debit'));
         $beban = $accounts->where('type', 'Beban')->sum(fn($a) => $a->journalDetails->sum('debit') - $a->journalDetails->sum('credit'));
 

@@ -81,4 +81,102 @@ class JournalEntryController extends Controller
     {
         //
     }
+
+
+    //PENYESUAIAN =====================================================================
+
+    public function indexPenyesuaian()
+    {
+        $journals = JournalEntry::where('type', 'Penyesuaian')->get();
+        $accounts = Account::orderBy('code')->get();
+        return view('journals.penyesuaian.index', compact('journals', 'accounts'));
+    }
+
+    public function storePenyesuaian(Request $request)
+    {
+        $request->validate([
+            'date' => 'required|date',
+            'description' => 'required',
+            'accounts.*.account_id' => 'required|exists:accounts,id',
+            'accounts.*.debit' => 'nullable|numeric',
+            'accounts.*.credit' => 'nullable|numeric',
+        ]);
+
+        $totalDebit = collect($request->accounts)->sum('debit');
+        $totalCredit = collect($request->accounts)->sum('credit');
+
+        if ($totalDebit != $totalCredit) {
+            return back()->withErrors(['message' => 'Jumlah debit dan kredit harus sama.']);
+        }
+
+        \DB::transaction(function () use ($request) {
+            $entry = JournalEntry::create([
+                'transaction_code' => 'JU-' . now()->timestamp,
+                'date' => $request->date,
+                'description' => $request->description,
+                'type' => 'Penyesuaian',
+                'created_by' => auth()->id(),
+            ]);
+
+            foreach ($request->accounts as $row) {
+                JournalDetail::create([
+                    'journal_entry_id' => $entry->id,
+                    'account_id' => $row['account_id'],
+                    'debit' => $row['debit'] ?? 0,
+                    'credit' => $row['credit'] ?? 0,
+                ]);
+            }
+        });
+
+        return redirect()->route('journals.penyesuaian')->with('success', 'Transaksi penyesuaian disimpan.');
+    }
+
+    //JURNAL PENUTUP =========================================================================================
+    public function indexPenutup()
+    {
+        $journals = \App\Models\JournalEntry::where('type', 'Penutup')->get();
+        $accounts = \App\Models\Account::orderBy('code')->get();
+        return view('journals.penutup.index', compact('journals', 'accounts'));
+    }
+
+    public function storePenutup(Request $request)
+    {
+        $request->validate([
+            'date' => 'required|date',
+            'description' => 'required',
+            'accounts.*.account_id' => 'required|exists:accounts,id',
+            'accounts.*.debit' => 'nullable|numeric',
+            'accounts.*.credit' => 'nullable|numeric',
+        ]);
+
+        $totalDebit = collect($request->accounts)->sum('debit');
+        $totalCredit = collect($request->accounts)->sum('credit');
+
+        if ($totalDebit != $totalCredit) {
+            return back()->withErrors(['message' => 'Jumlah debit dan kredit harus sama.']);
+        }
+
+        \DB::transaction(function () use ($request) {
+            $entry = \App\Models\JournalEntry::create([
+                'transaction_code' => 'JU-' . now()->timestamp,
+                'date' => $request->date,
+                'description' => $request->description,
+                'type' => 'Penutup',
+                'created_by' => auth()->id(),
+            ]);
+
+            foreach ($request->accounts as $row) {
+                \App\Models\JournalDetail::create([
+                    'journal_entry_id' => $entry->id,
+                    'account_id' => $row['account_id'],
+                    'debit' => $row['debit'] ?? 0,
+                    'credit' => $row['credit'] ?? 0,
+                ]);
+            }
+        });
+
+        return redirect()->route('journals.penutup')->with('success', 'Jurnal penutup berhasil disimpan.');
+    }
+
+
 }

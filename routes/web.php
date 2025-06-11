@@ -31,4 +31,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('neraca', [ReportController::class, 'balanceSheet'])->name('laporan.neraca');
     Route::get('perubahan-modal', [ReportController::class, 'equityChange'])->name('laporan.perubahan-modal');
     Route::get('arus-kas', [ReportController::class, 'cashFlow'])->name('laporan.arus-kas');
+
+    Route::get('/journals/penyesuaian/index', [JournalEntryController::class, 'indexPenyesuaian'])->name('journals.penyesuaian');
+    Route::post('/journals/penyesuaian/store', [JournalEntryController::class, 'storePenyesuaian'])->name('journals.penyesuaian.store');
+
+    Route::get('/journals/penutup/index', [JournalEntryController::class, 'indexPenutup'])->name('journals.penutup');
+    Route::post('/journals/penutup/store', [JournalEntryController::class, 'storePenutup'])->name('journals.penutup.store');
 });
