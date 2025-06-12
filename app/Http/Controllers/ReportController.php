@@ -4,9 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\JournalEntry;
 
 class ReportController extends Controller
 {
+    public function jurnalUmum(Request $request)
+    {
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+
+        $journals = JournalEntry::with(['details.account'])
+            ->when($tanggalAwal && $tanggalAkhir, function ($query) use ($tanggalAwal, $tanggalAkhir) {
+                $query->whereBetween('date', [$tanggalAwal, $tanggalAkhir]);
+            })
+            ->orderBy('date')
+            ->get();
+
+        return view('reports.jurnal-umum', compact('journals'));
+    }
+
     public function trialBalance(Request $request)
     {
         $start = $request->tanggal_awal;

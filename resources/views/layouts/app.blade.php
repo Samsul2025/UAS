@@ -115,6 +115,7 @@
                             Laporan
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('laporan.jurnal-umum') }}">Jurnal Umum</a></li>
                             <li><a class="dropdown-item" href="{{ route('laporan.neraca-saldo') }}">Neraca Saldo</a></li>
                             <li><a class="dropdown-item" href="{{ route('laporan.laba-rugi') }}">Laba Rugi</a></li>
                             <li><a class="dropdown-item" href="{{ route('laporan.neraca') }}">Neraca</a></li>

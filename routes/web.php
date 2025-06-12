@@ -29,9 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('journals', JournalEntryController::class);
     Route::post('transaksi/reset', [JournalEntryController::class,'reset_transaksi'])->name('transaksi.reset');
     
+    Route::get('laporan/jurnal-umum', [ReportController::class, 'jurnalUmum'])->name('laporan.jurnal-umum');
     Route::get('laporan/neraca-saldo', [ReportController::class, 'trialBalance'])->name('laporan.neraca-saldo');
     Route::get('laporan/laba-rugi', [ReportController::class, 'incomeStatement'])->name('laporan.laba-rugi');
-
     Route::get('neraca-saldo', [ReportController::class, 'trialBalance'])->name('laporan.neraca-saldo');
     Route::get('laba-rugi', [ReportController::class, 'incomeStatement'])->name('laporan.laba-rugi');
     Route::get('neraca', [ReportController::class, 'balanceSheet'])->name('laporan.neraca');

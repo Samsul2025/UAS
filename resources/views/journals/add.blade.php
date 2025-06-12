@@ -3,7 +3,7 @@
 
     <div class="mb-3">
         <label>Tanggal:</label>
-        <input type="date" name="date" required class="form-control" value="{{ date('Y-m-d') }}">
+        <input type="date" name="date" required class="form-control" value="{{ date('d-M-Y') }}">
     </div>
 
     <div class="mb-3">

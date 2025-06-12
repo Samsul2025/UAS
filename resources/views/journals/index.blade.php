@@ -23,7 +23,7 @@
     <tbody>
     @foreach($journals as $j)
         <tr>
-            <td>{{ $j->date }}</td>
+            <td>{{ date('d-M-Y', strtotime($j->date)) }}</td>
             <td>{{ $j->transaction_code }}</td>
             <td>{{ $j->description }}</td>
             <td>
