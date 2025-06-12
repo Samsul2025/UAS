@@ -163,7 +163,7 @@
             </div>
         </div>
     </nav>
-<div class="container-fluid p-4"> {{-- Dulu: p-0, sekarang pakai p-4 agar ada ruang --}}
+<div class="container-fluid p-0"> {{-- Dulu: p-0, sekarang pakai p-4 agar ada ruang --}}
 
     @yield('content') {{-- Ini adalah placeholder utama untuk konten spesifik halaman anak --}}
 
