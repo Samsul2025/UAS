@@ -20,7 +20,7 @@
         </select>
     </div>
     <div class="col-md-2">
-        <input type="date" name="tanggal" class="form-control" required>
+        <input type="date" name="tanggal" class="form-control" value="{{ request('tanggal') ?? date('Y-m-01') }}" required>
     </div>
     <div class="col-md-3">
         <input type="text" name="deskripsi" class="form-control" placeholder="Deskripsi" required>
