@@ -2,21 +2,27 @@
 @section('title', 'Laporan Jurnal Umum')
 
 @section('content')
+<div class="container">
 <h4 class="mb-3">Laporan Jurnal Umum</h4>
 
 <form method="GET" class="row mb-4">
     <div class="col-md-3">
         <label class="form-label">Tanggal Awal</label>
-        <input type="date" name="tanggal_awal" value="{{ request('tanggal_awal') }}" class="form-control" required>
+        <input type="date" name="tanggal_awal" 
+            value="{{ request('tanggal_awal') ?? date('Y-m-01') }}" 
+            class="form-control" required>
     </div>
     <div class="col-md-3">
         <label class="form-label">Tanggal Akhir</label>
-        <input type="date" name="tanggal_akhir" value="{{ request('tanggal_akhir') }}" class="form-control" required>
+        <input type="date" name="tanggal_akhir" 
+            value="{{ request('tanggal_akhir') ?? date('Y-m-t') }}" 
+            class="form-control" required>
     </div>
     <div class="col-md-3 align-self-end">
         <button class="btn btn-primary">Filter</button>
     </div>
 </form>
+
 
 <table class="table table-bordered">
     <thead class="table-light">
@@ -72,4 +78,5 @@
         </tr>
     </tbody>
 </table>
+</div>
 @endsection

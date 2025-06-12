@@ -3,6 +3,7 @@
 @section('title', 'Daftar Jurnal')
 
 @section('content')
+<div class="container">
 <h4 class="mb-3">Daftar Transaksi Jurnal</h4>
 
 <!-- Tombol Tambah -->
@@ -81,5 +82,6 @@
     </div>
   </div>
 </div>
+
 @endforeach
 @endsection
