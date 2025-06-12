@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="container">
+    <br>
 <h4 class="mb-3">Laporan Jurnal Umum</h4>
 
 <form method="GET" class="row mb-4">

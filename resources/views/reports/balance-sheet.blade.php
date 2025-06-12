@@ -2,6 +2,8 @@
 @section('title', 'Laporan Neraca')
 
 @section('content')
+<div class="container">
+      <br>
 <h4 class="mb-3">Laporan Neraca</h4>
 
 <form method="GET" class="row mb-4">
@@ -27,4 +29,5 @@
         <td><strong>{{ number_format($kewajiban + $modal, 0) }}</strong></td>
     </tr>
 </table>
+</div>
 @endsection

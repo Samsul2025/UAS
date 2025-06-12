@@ -2,6 +2,8 @@
 @section('title', 'Laporan Laba Rugi')
 
 @section('content')
+<div class="container">
+      <br>
 <h4 class="mb-3">Laporan Laba Rugi</h4>
 
 <form method="GET" class="row mb-4">
@@ -23,4 +25,5 @@
     <tr><th>Beban</th><td>{{ number_format($beban, 0) }}</td></tr>
     <tr class="table-info"><th>Laba Bersih</th><td><strong>{{ number_format($labaBersih, 0) }}</strong></td></tr>
 </table>
+</div>
 @endsection

@@ -2,6 +2,7 @@
 
 @section('title', 'Jurnal Penyesuaian')
 @section('content')
+<div class="container">
 <h4 class="mb-3">Daftar Jurnal Penyesuaian</h4>
 
 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">+ Tambah Jurnal Penyesuaian</button>
@@ -68,6 +69,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <script>

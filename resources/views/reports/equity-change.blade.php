@@ -2,6 +2,8 @@
 @section('title', 'Perubahan Modal')
 
 @section('content')
+<div class="container">
+      <br>
 <h4 class="mb-3">Laporan Perubahan Modal</h4>
 
 <form method="GET" class="row mb-4">
@@ -24,4 +26,5 @@
     <tr><th>- Prive</th><td>{{ number_format($prive, 0) }}</td></tr>
     <tr class="table-info"><th>Modal Akhir</th><td><strong>{{ number_format($modalAkhir, 0) }}</strong></td></tr>
 </table>
+</div>
 @endsection

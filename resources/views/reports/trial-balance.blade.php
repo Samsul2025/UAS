@@ -2,6 +2,8 @@
 @section('title', 'Neraca Saldo')
 
 @section('content')
+<div class="container">
+      <br>
 <h4 class="mb-3">Laporan Neraca Saldo</h4>
 
 <!-- 🔍 Form Filter Periode -->
@@ -44,4 +46,5 @@
         @endforeach
     </tbody>
 </table>
+</div>
 @endsection

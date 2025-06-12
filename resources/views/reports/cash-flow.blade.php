@@ -2,6 +2,8 @@
 @section('title', 'Laporan Arus Kas')
 
 @section('content')
+<div class="container">
+      <br>
 <h4 class="mb-3">Laporan Arus Kas</h4>
 
 <form method="GET" class="row mb-4">
@@ -24,4 +26,5 @@
     <tr><th>+ Penyesuaian</th><td>{{ number_format($penyesuaian, 0) }}</td></tr>
     <tr class="table-info"><th>Kas Akhir</th><td><strong>{{ number_format($saldoKas, 0) }}</strong></td></tr>
 </table>
+</div>
 @endsection
