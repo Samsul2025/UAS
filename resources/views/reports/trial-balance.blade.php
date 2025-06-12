@@ -10,11 +10,11 @@
 <form method="GET" class="row mb-4">
     <div class="col-md-3">
         <label for="tanggal_awal" class="form-label">Tanggal Awal</label>
-        <input type="date" name="tanggal_awal" value="{{ request('tanggal_awal') }}" class="form-control" required>
+        <input type="date" name="tanggal_awal" value="{{ request('tanggal_awal') ?? date('Y-m-01') }}" class="form-control" required>
     </div>
     <div class="col-md-3">
         <label for="tanggal_akhir" class="form-label">Tanggal Akhir</label>
-        <input type="date" name="tanggal_akhir" value="{{ request('tanggal_akhir') }}" class="form-control" required>
+        <input type="date" name="tanggal_akhir" value="{{ request('tanggal_akhir') ?? date('Y-m-t') }}" class="form-control" required>
     </div>
     <div class="col-md-3 align-self-end">
         <button class="btn btn-primary">Filter</button>
