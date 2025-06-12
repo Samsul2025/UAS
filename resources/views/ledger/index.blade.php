@@ -2,6 +2,8 @@
 @section('title', 'Buku Besar')
 
 @section('content')
+<div class="container">
+<br>
 <h4 class="mb-3">Buku Besar</h4>
 
 <form method="GET" class="row mb-4">
@@ -18,11 +20,11 @@
     </div>
     <div class="col-md-3">
         <label class="form-label">Tanggal Awal</label>
-        <input type="date" name="tanggal_awal" class="form-control" value="{{ request('tanggal_awal') }}" required>
+        <input type="date" name="tanggal_awal" class="form-control" value="{{ request('tanggal_awal') ?? date('Y-m-01') }}" required>
     </div>
     <div class="col-md-3">
         <label class="form-label">Tanggal Akhir</label>
-        <input type="date" name="tanggal_akhir" class="form-control" value="{{ request('tanggal_akhir') }}" required>
+        <input type="date" name="tanggal_akhir" class="form-control" value="{{ request('tanggal_akhir') ?? date('Y-m-t') }}" required>
     </div>
     <div class="col-md-2 align-self-end">
         <button class="btn btn-primary">Tampilkan</button>
@@ -35,7 +37,7 @@
             Buku Besar: {{ $selectedAccount->code }} - {{ $selectedAccount->name }}
         </div>
         <div class="card-body p-0">
-            <table class="table table-bordered mb-0">
+            <table class="table table-bordered table-sm mb-0">
                 <thead>
                     <tr>
                         <th>Tanggal</th>
@@ -66,6 +68,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
 @endif
 @endsection

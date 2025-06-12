@@ -22,7 +22,7 @@
 </form>
 
 <!-- 📊 Tabel Laporan -->
-<table class="table table-bordered">
+<table class="table table-bordered table-sm">
     <thead class="table-light">
         <tr>
             <th>Kode Akun</th>

@@ -20,7 +20,7 @@
     </div>
 </form>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-sm">
     <tr><th>Total Aset</th><td>{{ number_format($aset, 0) }}</td></tr>
     <tr><th>Total Kewajiban</th><td>{{ number_format($kewajiban, 0) }}</td></tr>
     <tr><th>Total Modal</th><td>{{ number_format($modal, 0) }}</td></tr>

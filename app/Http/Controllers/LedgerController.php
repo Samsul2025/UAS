@@ -17,7 +17,7 @@ class LedgerController extends Controller
         if ($request->filled('account_id')) {
             $selectedAccount = Account::findOrFail($request->account_id);
 
-            $ledgerEntries = \App\Models\JournalDetail::with('journalEntry')
+            $ledgerEntries = JournalDetail::with('journalEntry')
                 ->where('account_id', $selectedAccount->id)
                 ->whereHas('journalEntry', function ($query) use ($request) {
                     if ($request->tanggal_awal && $request->tanggal_akhir) {

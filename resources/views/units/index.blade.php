@@ -2,6 +2,8 @@
 @section('title', 'Unit / Departemen')
 
 @section('content')
+<div class="container">
+    <br>
 <h4 class="mb-3">Daftar Unit / Departemen</h4>
 
 <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modalCreate">+ Tambah Unit</button>

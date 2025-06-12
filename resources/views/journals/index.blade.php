@@ -13,7 +13,7 @@
 </button>
 
 <!-- Tabel -->
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-sm">
     <thead class="table-light">
         <tr>
             <th>Tanggal</th>
@@ -29,8 +29,8 @@
             <td>{{ $j->transaction_code }}</td>
             <td>{{ $j->description }}</td>
             <td>
-                <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalLihat{{ $j->id }}">
-                    Lihat
+                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalLihat{{ $j->id }}">
+                    <i class="fas fa-eye"></i> Lihat
                 </button>
             </td>
         </tr>

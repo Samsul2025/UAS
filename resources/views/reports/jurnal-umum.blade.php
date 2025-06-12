@@ -25,7 +25,7 @@
 </form>
 
 
-<table class="table table-bordered">
+<table class="table table-bordered table-sm">
     <thead class="table-light">
         <tr>
             <th>Tanggal</th>
@@ -50,7 +50,7 @@
 
             @foreach ($journal->details as $index => $detail)
                 <tr>
-                    <td>{{ $index == 0 ? \Carbon\Carbon::parse($journal->date)->format('d-m-Y') : '' }}</td>
+                    <td>{{ $index == 0 ? \Carbon\Carbon::parse($journal->date)->format('d-m-Y') : '' }}</td>                   
                     <td>{{ $index == 0 ? $journal->transaction_code : '' }}</td>
                     <td>{{ $index == 0 ? $journal->description : '' }}</td>
                     <td>{{ $detail->account->name }}</td>

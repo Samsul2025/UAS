@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Periode Akuntansi')
 @section('content')
+<div class="container">
+    <br>
 <h4 class="mb-3">Daftar Periode Akuntansi</h4>
 
 <!-- Tombol -->
@@ -42,7 +44,7 @@
 </div>
 
 
-<table class="table table-bordered">
+<table class="table table-bordered table-sm">
     <thead>
         <tr>
             <th>Nama Periode</th>

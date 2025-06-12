@@ -12,7 +12,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Account::orderBy('code')->paginate(10); //paging tambahkan pada AppServiceProvide.php
+        $accounts = Account::orderBy('code')->get(); //paging tambahkan pada AppServiceProvide.php
         return view('accounts.index', compact('accounts'));
     }
 

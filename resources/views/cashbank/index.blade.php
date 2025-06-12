@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Kas & Bank')
 @section('content')
-
+<div class="container">
+<br>
 <h4 class="mb-3">Transaksi Kas & Bank</h4>
 
 <form method="POST" action="{{ route('cashbank.store') }}" class="row mb-4">
@@ -64,5 +65,5 @@
         @endforeach
     </tbody>
 </table>
-
+</div>
 @endsection
