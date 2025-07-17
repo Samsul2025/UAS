@@ -7,7 +7,10 @@ use App\Http\Controllers\CashBankController;
 use App\Http\Controllers\JournalEntryController;
 use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\RekeningBankController;
 
 Route::get('/', function () {
     return view('frontend');
@@ -25,8 +28,11 @@ Route::middleware([
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::resource('suppliers', SupplierController::class);
     Route::resource('accounts', AccountController::class);
+    Route::resource('siswas', SiswaController::class);
     Route::resource('journals', JournalEntryController::class);
+    Route::resource('rekening_bank', RekeningBankController::class);
     Route::post('transaksi/reset', [JournalEntryController::class,'reset_transaksi'])->name('transaksi.reset');
     
     Route::get('laporan/jurnal-umum', [ReportController::class, 'jurnalUmum'])->name('laporan.jurnal-umum');
@@ -37,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('neraca', [ReportController::class, 'balanceSheet'])->name('laporan.neraca');
     Route::get('perubahan-modal', [ReportController::class, 'equityChange'])->name('laporan.perubahan-modal');
     Route::get('arus-kas', [ReportController::class, 'cashFlow'])->name('laporan.arus-kas');
+    
 
     Route::get('/journals/penyesuaian/index', [JournalEntryController::class, 'indexPenyesuaian'])->name('journals.penyesuaian');
     Route::post('/journals/penyesuaian/store', [JournalEntryController::class, 'storePenyesuaian'])->name('journals.penyesuaian.store');
